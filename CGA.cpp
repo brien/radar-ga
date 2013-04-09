@@ -51,6 +51,7 @@ int CGA::LoadState(string filename)
     //  1, 3, 0, 2 0.42450
     //
     //  END
+    //  TODO: Add the above to documentation. Don't document in commends.
     ifstream f;
     f.open( filename.c_str() );
 
@@ -86,17 +87,20 @@ int CGA::LoadState(string filename)
 
 void CGA::Initialize(int randomseed, unsigned int m, unsigned int l, double mr, bool fs, bool uni)
 {
-   if(randomseed < 0)
+    if(randomseed < 0)
+    {
         mtRand.seed();
+    }
     else
+    {
         mtRand.seed(randomseed);
-        
+    }
     lambda = l;
     mu = m;
     mutation_rate = mr;
     useFitnessScaling = fs;
     useUniqueness = uni;
-    
+
     totalFit = 0.0;
 
     cout << "|| Initalization: Parameters OKAY" << endl;
@@ -133,7 +137,7 @@ void CGA::Initialize(int randomseed, unsigned int m, unsigned int l, double mr, 
         }
         evalthreads.clear();
     }
-    
+
     for( unsigned int i = 0; i < mu; i++)
     {
         totalFit += population[i].fitness;
@@ -170,26 +174,26 @@ void CGA::NPointCrossover(const unsigned int n, const unsigned int p1, const uns
         if(i%2)
         {
             child1.genotype.insert( child1.genotype.begin()+lastCrossoverPoint,
-                        population[p1].genotype.begin()+lastCrossoverPoint,
-                        population[p1].genotype.begin()+crossoverPoint);
+                    population[p1].genotype.begin()+lastCrossoverPoint,
+                    population[p1].genotype.begin()+crossoverPoint);
 
             child2.genotype.insert( child2.genotype.begin()+lastCrossoverPoint,
-                        population[p2].genotype.begin()+lastCrossoverPoint,
-                        population[p2].genotype.begin()+crossoverPoint);
+                    population[p2].genotype.begin()+lastCrossoverPoint,
+                    population[p2].genotype.begin()+crossoverPoint);
         }
         else
         {
             child1.genotype.insert( child1.genotype.begin()+lastCrossoverPoint,
-                        population[p2].genotype.begin()+lastCrossoverPoint,
-                        population[p2].genotype.begin()+crossoverPoint);
+                    population[p2].genotype.begin()+lastCrossoverPoint,
+                    population[p2].genotype.begin()+crossoverPoint);
 
             child2.genotype.insert( child2.genotype.begin()+lastCrossoverPoint,
-                        population[p1].genotype.begin()+lastCrossoverPoint,
-                        population[p1].genotype.begin()+crossoverPoint);
+                    population[p1].genotype.begin()+lastCrossoverPoint,
+                    population[p1].genotype.begin()+crossoverPoint);
         }
     }
-    
-    
+
+
     return;
 }
 void CGA::Mutate(const unsigned int c)
@@ -252,10 +256,10 @@ void CGA::RunGeneration()
     //Find lambda # of pairs
     for( unsigned int i = 0; i < lambda; i+=2)
     {
-        
+
         unsigned int p1, p2;
         unsigned int c1 = i, c2 = i+1;
-        
+
         if(c2 > lambda-1)
         {
             cerr << "child index out of bounds" << endl;
@@ -264,13 +268,13 @@ void CGA::RunGeneration()
 
         //Children Generation
         //Create lambda # of children from pairs
-        
+
 
         NPointCrossover( 1, p1, p2, c1, c2);
-    
+
         Mutate(c1);
         Mutate(c2);
-    
+
     }
     if( useUniqueness )
     {
@@ -294,9 +298,9 @@ void CGA::RunGeneration()
 
         }
     }
-    
- 
-    
+
+
+
     unsigned int ck = 0;
     while( ck < lambda)
     {
@@ -318,7 +322,7 @@ void CGA::RunGeneration()
         }
         evalthreads.clear();
     }
-   
+
     for( unsigned int k = 0; k < lambda; k++)
     {
         double oldmse = children[k].MSE;
@@ -327,7 +331,7 @@ void CGA::RunGeneration()
             cout << "ERROR in multithreaded fitness eval" << endl;
         } 
     }
-    
+
 
     //Survival Selection
 
@@ -353,13 +357,13 @@ void CGA::RunGeneration()
     //GENERATIONAL:
     //population = children;
     //sort(population.begin(), population.end());
-    
+
     //GENERATIONA GAP: (replace the worst portion of the population with the G best kids.)
     //unsigned int G = mu/2;
     //sort(children.begin(), children.end() );
     //population.erase( population.begin() + G , population.end() );
     //population.insert(population.end(), children.begin(), children.begin() + G );
-    
+
 
 }
 
@@ -402,7 +406,7 @@ void CGA::ParentSelection_FitnessProportional(unsigned int &p1, unsigned int &p2
     {
         p2 = 1;
     }
-    
+
     //cerr << "Parent Selection: Selected " << "Parent 1: " << p1 << ", Parent 2: " << p2 << endl;
 
 }

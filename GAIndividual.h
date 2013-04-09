@@ -22,48 +22,48 @@ class CGA;
 class GAIndividual
 {
 
-private:
-	
+    private:
 
-public:
-	//--PROBLEM SPECIFIC STUFF:
-    //Chromosome length:
-    unsigned int CHROMO_LENGTH;
-    //length of the genetic alphabet
-    unsigned int ALPHA_LENGTH;
-	
-	//GAIndividual();
-	GAIndividual(CGA* w, unsigned int cl, unsigned int al );
-	void GenerateRandomIndividual();
-	CGA* world;
-	
-	double fitness;
-	double MSE;
-	bool isEvaled;
 
-	//vector< complex<double> > genotype;
-	std::vector< unsigned int > genotype;
-	
-	bool operator==(const GAIndividual &x ) const
-	{
-		for(int i=0; i<genotype.size(); i++)
-		{
-			if( genotype[i] != x.genotype[i] )
-			{
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	//Used for sorting
-	bool operator<( const GAIndividual &x ) const
-	{
-		return (x.fitness < fitness );
-	}
+    public:
+        //--PROBLEM SPECIFIC STUFF:
+        //Chromosome length:
+        unsigned int CHROMO_LENGTH;
+        //length of the genetic alphabet
+        unsigned int ALPHA_LENGTH;
 
-    friend ostream & operator<< (ostream & lhs, const GAIndividual & rhs);
+        //GAIndividual();
+        GAIndividual(CGA* w, unsigned int cl, unsigned int al );
+        void GenerateRandomIndividual();
+        CGA* world;
+
+        double fitness;
+        double MSE;
+        bool isEvaled;
+
+        //vector< complex<double> > genotype;
+        std::vector< unsigned int > genotype;
+
+        bool operator==(const GAIndividual &x ) const
+        {
+            for(int i=0; i<genotype.size(); i++)
+            {
+                if( genotype[i] != x.genotype[i] )
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //Used for sorting
+        bool operator<( const GAIndividual &x ) const
+        {
+            return (x.fitness < fitness );
+        }
+
+        friend ostream & operator<< (ostream & lhs, const GAIndividual & rhs);
 
 };
 

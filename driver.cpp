@@ -43,16 +43,16 @@ int main(int argc, char* argv[] )
     bool useFitnessScaling=false;
     bool useUniqueness=false;
     int MAX_THREADS = 1;
-    
+
     int PSK = 4;
     int txlength = 13;
-    
-    
+
+
     if( argc < 2)
     {
         cout << "Default Configuration" << endl;
     }
-    
+
     int optind=1;
     // get arguments
     while ((optind < argc) && (argv[optind][0]=='-'))
@@ -128,7 +128,7 @@ int main(int argc, char* argv[] )
     }
     else if (MAX_THREADS < 0 ) //|| MAX_THREADS > lambda)
     {
-            MAX_THREADS = lambda;
+        MAX_THREADS = lambda;
     }
 
     if ( mutation_rate < 0)
@@ -139,7 +139,7 @@ int main(int argc, char* argv[] )
     cout << "|| GA version: " << VERSION_NUMBER << endl;
 
     cout << "||Configuration:" << endl;
-    
+
     cout << "|| tx code length = " << txlength << endl;
     cout << "|| PSK = " << PSK << endl;
     cout << "-------------" << endl;
@@ -151,13 +151,11 @@ int main(int argc, char* argv[] )
     cout << "|| fitness scaling = " << useFitnessScaling << endl;
     cout << "|| use uniqueness = " << useUniqueness << endl;
     cout << "|| max number of eval threads = " << MAX_THREADS << endl;
-    
+
     clock_t start_time = clock();
     clock_t gen_time;
 
     std::vector< std::complex<float> > seeder(51, complex<float>(0,0) );
-
-
 
     CGA myGA(txlength, PSK);
 
@@ -167,17 +165,12 @@ int main(int argc, char* argv[] )
 
     cout << "Gen Evals  AvgF       BestF       Elite            Time" << endl;
     cout << "====================================" << endl;
-    
-    
-        
-    
+
     if( loadfile != "")
     {
         myGA.LoadState(loadfile);
         cout << "|| loaded from statefile = " << loadfile << endl;
     }
-    
-    
 
     for(unsigned int i = 0; i < num_gens; i++)
     {

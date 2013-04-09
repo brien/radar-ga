@@ -89,8 +89,6 @@ class CGA
     double a;
     double b;
     double totalFit;
-
-
 };
 
 
