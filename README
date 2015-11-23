@@ -1,5 +1,6 @@
 Radar-GA
 A genetic algorithm to generate radar transmit codes.
+This program was used in the article "A Genetic Algorithm for Generating Radar Transmit Codes to Minimize the Target Estimation Error" in the Journal of Intelligent Systems 2013.
 This program and the source code is provided for educational purposes only.
 
 Copyright 2010-2013 Brien Smith-Martinez
